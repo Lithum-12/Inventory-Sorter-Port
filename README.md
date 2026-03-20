@@ -25,3 +25,10 @@ Delete any other inventory sorting mods before adding this one to avoid conflict
 ## Configuration
 
 Sort order and button visibility can be changed in the config file (may require game restart).
+
+## License
+
+· All code except QuarkSortingHandler.java is under GPLv3 (commercial use allowed, must follow GPL terms).
+· QuarkSortingHandler.java is under CC BY-NC-SA 3.0 (commercial use strictly prohibited).
+
+For commercial use of the CC‑licensed file, you must obtain permission from its original author.
