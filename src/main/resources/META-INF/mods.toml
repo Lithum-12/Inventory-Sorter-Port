@@ -5,10 +5,10 @@ license="GPL 3.0 for the rest, CC BY-NC-SA 3.0 for QuarkSortingHandler.java"
 [[mods]]
 modId="inventorysorter"
 version="${file.jarVersion}"
-displayName="Simple Inventory Sorter (Configurable)"
-displayURL="https://github.com/qyurila/inventorysorter"
+displayName="Inventory Sorter Port"
+displayURL="https://github.com/qyurila/Inventory-Sorter-Port"
 credits="Vazkii (Quark sort order)"
-authors="cpw (original mod), QriLa (fork)"
+authors="cpw (original mod), QriLa (fork), Lithum-12 (fork)"
 description='''
 Simple inventory sorting, in configurable order.
 

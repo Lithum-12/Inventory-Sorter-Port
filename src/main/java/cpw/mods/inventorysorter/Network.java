@@ -44,6 +44,10 @@ public final class Network {
             this.slotIndex = slotIndex;
         }
 
+        public static ActionMessage fromActionAndSlot(Action action, int slotIndex) {
+            return new ActionMessage(action, slotIndex);
+        }
+
         static ActionMessage fromBytes(ByteBuf buf) {
             return new ActionMessage(Action.values()[buf.readByte()], buf.readInt());
         }
@@ -55,7 +59,7 @@ public final class Network {
     }
 
 
-    static SimpleChannel channel;
+    public static SimpleChannel channel;
 
     static {
         channel = NetworkRegistry.ChannelBuilder.named(invsorter)

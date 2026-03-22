@@ -12,10 +12,11 @@ buildscript {
 }
 
 plugins {
-    id 'com.matthewprenger.cursegradle' version '1.4.0'
-    id 'se.bjurr.gitchangelog.git-changelog-gradle-plugin' version '1.71.4'
-    id 'org.ajoberstar.grgit' version '4.1.1'
-    id 'com.github.ben-manes.versions' version '0.39.0'
+    // 高级插件（暂时不需要）
+    // id 'com.matthewprenger.cursegradle' version '1.4.0'
+    // id 'se.bjurr.gitchangelog.git-changelog-gradle-plugin' version '1.71.4'
+    // id 'org.ajoberstar.grgit' version '4.1.1'
+    // id 'com.github.ben-manes.versions' version '0.39.0'
 }
 
 repositories {
@@ -26,15 +27,13 @@ apply plugin: 'idea'
 apply plugin: 'maven-publish'
 apply from: 'https://raw.githubusercontent.com/SizableShrimp/Forge-Class-Remapper/main/classremapper.gradle'
 
-group= 'cpw.mods'
+group = 'cpw.mods'
 archivesBaseName = 'inventorysorter'
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
-//reckon {
-//    scopeFromProp()
-//    stageFromProp('ms', 'final')
-//}
-version = grgit.describe(longDescr: true).split('-').with { "${it[0]}.${it[1]}" }
+// 动态版本号（依赖 grgit），从项目属性读取或使用默认值（看不懂）
+// version = grgit.describe(longDescr: true).split('-').with { "${it[0]}.${it[1]}" }
+version = project.findProperty('modVersion') ?: '3.2.0'
 
 minecraft {
     mappings channel: "official", version: MC_VERSION
@@ -42,10 +41,7 @@ minecraft {
         client {
             workingDirectory project.file('run')
 
-            // Recommended logging data for a userdev environment
             property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
-
-            // Recommended logging level for the console
             property 'forge.logging.console.level', 'info'
             property 'forge.logging.noansi', 'false'
             ideaModule "${project.name}.main"
@@ -54,10 +50,7 @@ minecraft {
         server {
             workingDirectory project.file('run')
 
-            // Recommended logging data for a userdev environment
             property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
-
-            // Recommended logging level for the console
             property 'forge.logging.console.level', 'info'
             property 'forge.logging.noansi', 'false'
             ideaModule "${project.name}.main"
@@ -77,6 +70,8 @@ dependencies {
     minecraft "net.minecraftforge:forge:${MC_VERSION}-${FORGE_VERSION}"
 }
 
+/*
+// 变更日志生成任务（原 makeChangelog，看不懂）
 task makeChangelog(type: se.bjurr.gitchangelog.plugin.gradle.GitChangelogTask) {
     file = project.file('CHANGELOG.md')
     fromRepo = file(".")
@@ -95,7 +90,10 @@ task makeChangelog(type: se.bjurr.gitchangelog.plugin.gradle.GitChangelogTask) {
 {{/tags}}
 """
 }
+*/
 
+/*
+// CurseForge 发布配置（暂时不需要）
 curseforge {
     apiKey = project.hasProperty('curseforge_apikey') ? project.curseforge_apikey : '0'
     project {
@@ -106,27 +104,31 @@ curseforge {
         addGameVersion '1.20.1'
     }
     options {
-        javaVersionAutoDetect = true // defaults to true
-        javaIntegration = true // defaults to true
-        forgeGradleIntegration = true // defaults to true
+        javaVersionAutoDetect = true
+        javaIntegration = true
+        forgeGradleIntegration = true
     }
 }
+*/
 
+/*
+// beforeEvaluate 块，依赖 curseforge 任务（暂时不需要）
 beforeEvaluate {
     tasks.curseforge240633.dependsOn.remove(reobfJar)
     tasks.curseforge240633.dependsOn.remove(jar)
     tasks.curseforge240633.dependsOn.add(makeChangelog)
 }
+*/
 
 jar {
     manifest {
         attributes([
-                "Specification-Title": 'inventorysorter',
-                "Specification-Vendor": 'cpwmods',
-                "Specification-Version": '1', // We are version 1 of ourselves
-                "Implementation-Title": project.name,
+                "Specification-Title"   : 'inventorysorter',
+                "Specification-Vendor"  : 'cpwmods',
+                "Specification-Version" : '1',
+                "Implementation-Title"  : project.name,
                 "Implementation-Version": "${version}",
-                "Implementation-Vendor" :'cpwmods',
+                "Implementation-Vendor" : 'cpwmods',
                 "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
         ])
     }
@@ -139,6 +141,8 @@ def reobfArtifact = artifacts.add('default', reobfFile) {
     builtBy 'reobfJar'
 }
 
+/*
+// Maven 发布配置（看不懂）
 publishing {
     publications {
         mavenJava(MavenPublication) {
@@ -148,10 +152,11 @@ publishing {
     repositories {
         maven {
             credentials {
-                username project.properties.cpwMavenUser?:'spam'
-                password project.properties.cpwMavenPassword?:'bums'
+                username project.properties.cpwMavenUser ?: 'spam'
+                password project.properties.cpwMavenPassword ?: 'bums'
             }
             url 'https://maven.minecraftforge.net/'
         }
     }
 }
+*/

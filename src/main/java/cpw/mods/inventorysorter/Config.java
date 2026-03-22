@@ -53,8 +53,8 @@ public class Config {
             DISPLAY_NAME,
         }
 
-        static final ClientConfig CONFIG;
-        static final ForgeConfigSpec SPEC;
+        public static final ClientConfig CONFIG;
+        public static final ForgeConfigSpec SPEC;
 
         static {
             final Pair<ClientConfig, ForgeConfigSpec> conf = new ForgeConfigSpec.Builder().configure(ClientConfig::new);
@@ -62,9 +62,10 @@ public class Config {
             SPEC = conf.getRight();
         }
 
-        final ForgeConfigSpec.EnumValue<SortOrder> sortOrder;
-        final ForgeConfigSpec.BooleanValue sortByCountFirst;
-        final ForgeConfigSpec.BooleanValue excludeHotbar;
+        public final ForgeConfigSpec.EnumValue<SortOrder> sortOrder;
+        public final ForgeConfigSpec.BooleanValue sortByCountFirst;
+        public final ForgeConfigSpec.BooleanValue excludeHotbar;
+        public final ForgeConfigSpec.BooleanValue showSortButton;
 
         private ClientConfig(ForgeConfigSpec.Builder builder) {
             builder.comment("Inventory sorter");
@@ -81,6 +82,10 @@ public class Config {
                     .comment("Exclude hotbar from sorting")
                     .translation("inventorysorter.config.excludehotbar")
                     .define("excludeHotbar", true);
+            showSortButton = builder
+                    .comment("Show sort button on inventory screens")
+                    .translation("inventorysorter.config.showsortbutton")
+                    .define("showSortButton", true);
             builder.pop();
         }
     }

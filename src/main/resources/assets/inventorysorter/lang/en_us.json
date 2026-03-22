@@ -17,5 +17,8 @@
   "inventorysorter.config.containerblacklist": "Container blacklist",
   "inventorysorter.config.slotblacklist": "Slot type blacklist",
   "inventorysorter.config.sortorder": "Sort order",
-  "inventorysorter.config.sortbycountfirst": "Sort by count first"
+  "inventorysorter.config.sortbycountfirst": "Sort by count first",
+  "inventorysorter.config.excludehotbar": "Exclude hotbar from sorting",
+  "inventorysorter.config.showsortbutton": "Show sort button on inventory screens",
+  "inventorysorter.gui.sort": "Sort"
 }

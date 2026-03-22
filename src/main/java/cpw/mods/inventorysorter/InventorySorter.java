@@ -60,6 +60,7 @@ import java.util.stream.Stream;
 public class InventorySorter
 {
     public static InventorySorter INSTANCE;
+    public static final String MODID = "inventorysorter";
 
     static final Logger LOGGER = LogManager.getLogger();
     ResourceLocation lastContainerType;
@@ -83,6 +84,11 @@ public class InventorySorter
         COMMAND_ARGUMENT_TYPES.register(bus);
         MinecraftForge.EVENT_BUS.addListener(this::onServerStarting);
         DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> KeyHandler::init);
+        DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> cpw.mods.inventorysorter.client.ScreenEventHandler::init);
+    }
+    
+    public static void initClient() {
+        // Client-only initialization
     }
 
     private void handleimc(final InterModProcessEvent evt)
